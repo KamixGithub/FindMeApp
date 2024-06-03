@@ -6,6 +6,8 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.findme.model.DeviceModel;
 import com.example.findme.view.MainActivity;
 
@@ -38,7 +40,7 @@ public class SensorController implements SensorEventListener {
             SensorManager.getRotationMatrixFromVector(deviceModel.getrMat(), event.values);
             deviceModel.setmAzimuth((float) Math.toDegrees(SensorManager.getOrientation(deviceModel.getrMat(), deviceModel.getOrientation())[0]));
         }
-        activity.updateArrowRotation(deviceModel.getmAzimuth());
+        activity.compassView.updateArrowRotation(deviceModel.getmAzimuth());
     }
 
     @Override

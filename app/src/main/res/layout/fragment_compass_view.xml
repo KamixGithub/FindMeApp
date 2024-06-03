@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,19 +19,7 @@
     app:srcCompat="@drawable/logo"
     tools:srcCompat="@drawable/arrow" />
 
-    <Button
-        android:id="@+id/buttonFriend"
-        android:layout_width="248dp"
-        android:layout_height="85dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/lightgreen"
-        android:text="@string/Friend"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 <ImageView
     android:id="@+id/logoIMG"
@@ -48,19 +33,17 @@
     app:layout_constraintTop_toTopOf="parent"
     app:srcCompat="@mipmap/ic_launcher" />
 
-<TextView
-    android:id="@+id/coordsText"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="7dp"
-    android:layout_marginBottom="8dp"
-    android:text="@string/lat_nan_long_nan"
-    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-    app:layout_constraintBottom_toTopOf="@+id/buttonFriend"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/arrowIMG" />
+    <TextView
+        android:id="@+id/coordsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/lat_nan_long_nan"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrowIMG" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">FindMe</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="Back">Back</string>
     <string name="Friend">Friend</string>
     <string name="lat_nan_long_nan">Lat:NaN long:NaN</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Compass">Compass</string>
 </resources>
