@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        compassView = new CompassView();
+        friendlistView = new FriendlistView();
+
         navButton = findViewById(R.id.buttonFriend);
 
         navButton.setOnClickListener(v -> {
@@ -50,16 +53,12 @@ public class MainActivity extends AppCompatActivity{
             navButton.setText(getString(R.string.Friend));
             compassviewActive = true;}
         });
-        compassView = new CompassView();
-        friendlistView = new FriendlistView();
 
 
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, compassView);
         fragmentTransaction.commit();
-
-
 
     }
 

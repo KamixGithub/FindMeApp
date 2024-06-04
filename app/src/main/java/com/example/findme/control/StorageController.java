@@ -22,18 +22,23 @@ public class StorageController {
     }
 
     public boolean addFriend(UserModel user){
+        return userModelList.putIfAbsent(user.getFriendcode(), user) != null;
     }
 
     public boolean deleteFriend(int friendCode){
+        return userModelList.remove(friendCode) != null;
     }
 
     public boolean addLocation(LocationModel location){
+        return locationList.putIfAbsent(location.getName(),location) != null;
     }
 
     public boolean deleteLocation(String name){
+        return locationList.remove(name) != null;
     }
 
     public void updateFriendListView(){
+
     }
 
     public void updateLocationListView(){

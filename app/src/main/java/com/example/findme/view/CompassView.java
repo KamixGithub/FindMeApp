@@ -43,8 +43,8 @@ public class CompassView extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_compass_view, container, false);
 
-        locationController = new LocationController(mainActivity);
-        sensorController = new SensorController(mainActivity);
+        locationController = new LocationController((MainActivity) getActivity());
+        sensorController = new SensorController((MainActivity) getActivity());
 
         arrowIMG = view.findViewById(R.id.arrowIMG);
         coordsText = view.findViewById(R.id.coordsText);
