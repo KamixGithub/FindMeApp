@@ -40,7 +40,7 @@ public class SensorController implements SensorEventListener {
             SensorManager.getRotationMatrixFromVector(deviceModel.getrMat(), event.values);
             deviceModel.setmAzimuth((float) Math.toDegrees(SensorManager.getOrientation(deviceModel.getrMat(), deviceModel.getOrientation())[0]));
         }
-        activity.compassView.updateArrowRotation(deviceModel.getmAzimuth());
+        activity.getCompassView().updateArrowRotation(deviceModel.getmAzimuth());
     }
 
     @Override

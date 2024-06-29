@@ -4,9 +4,12 @@ public class UserModel {
     private String name;
     private int friendcode;
 
+    double[] location;
+
     public UserModel(String name, int friendcode) {
         this.name = name;
         this.friendcode = friendcode;
+        this.location = new double[]{0.0, 0.0};
     }
 
     public String getName() {
@@ -21,7 +24,7 @@ public class UserModel {
         return friendcode;
     }
 
-    public void setFriendcode(int friendcode) {
-        this.friendcode = friendcode;
+    public void setLocation(double[] location) {
+        this.location = location;
     }
 }

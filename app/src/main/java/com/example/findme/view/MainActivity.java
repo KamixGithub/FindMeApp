@@ -19,14 +19,21 @@ import android.widget.TextView;
 import com.example.findme.control.LocationController;
 import com.example.findme.R;
 import com.example.findme.control.SensorController;
+import com.example.findme.control.StorageController;
+import com.example.findme.model.LocationModel;
+import com.example.findme.model.UserModel;
 
 
 public class MainActivity extends AppCompatActivity{
 
 
-     public FriendlistView friendlistView;
-    public CompassView compassView;
+     private FriendlistView friendlistView;
+    private CompassView compassView;
+
+    private StorageController storageController;
     FragmentManager fragmentManager;
+
+    LocationModel focusLocation;
 
     boolean compassviewActive = true;
 
@@ -40,6 +47,9 @@ public class MainActivity extends AppCompatActivity{
 
         compassView = new CompassView();
         friendlistView = new FriendlistView();
+        storageController = new StorageController();
+
+        friendlistView.setStorageController(storageController);
 
         navButton = findViewById(R.id.buttonFriend);
 
@@ -84,6 +94,12 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    public CompassView getCompassView() {
+        return compassView;
+    }
 
+    public StorageController getStorageController (){
+        return storageController;
+    }
 }
 

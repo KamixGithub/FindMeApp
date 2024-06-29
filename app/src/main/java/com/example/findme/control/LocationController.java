@@ -32,7 +32,7 @@ public class LocationController implements LocationListener {
             if (lastKnownLocation!= null) {
                 deviceModel.setLatitude(lastKnownLocation.getLatitude());
                 deviceModel.setLongitude(lastKnownLocation.getLongitude());
-                activity.compassView.updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
+                activity.getCompassView().updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
             }else{
                 //TODO
             }
@@ -44,7 +44,7 @@ public class LocationController implements LocationListener {
     public void onLocationChanged(@NonNull Location location) {
         deviceModel.setLatitude(location.getLatitude());
         deviceModel.setLongitude(location.getLongitude());
-        activity.compassView.updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
+        activity.getCompassView().updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
     }
 
     public double calculateBearing( double lat2, double lon2) {

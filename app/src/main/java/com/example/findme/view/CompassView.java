@@ -16,6 +16,8 @@ import com.example.findme.R;
 import com.example.findme.control.LocationController;
 import com.example.findme.control.SensorController;
 
+import java.util.Objects;
+
 public class CompassView extends Fragment {
     private ImageView arrowIMG;
     private TextView coordsText;
@@ -23,9 +25,11 @@ public class CompassView extends Fragment {
     SensorController sensorController;
     LocationController locationController;
 
-    MainActivity mainActivity;
+    private double[] findMe_cords;
 
-    private final double[] FINDEME_COORDS = {52.417662, 13.413297};
+    public CompassView (){
+        findMe_cords = new double[]{0.0, 0.0};
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,8 +47,8 @@ public class CompassView extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_compass_view, container, false);
 
-        locationController = new LocationController((MainActivity) getActivity());
-        sensorController = new SensorController((MainActivity) getActivity());
+        locationController = new LocationController((MainActivity) requireActivity());
+        sensorController = new SensorController((MainActivity) requireActivity());
 
         arrowIMG = view.findViewById(R.id.arrowIMG);
         coordsText = view.findViewById(R.id.coordsText);
@@ -52,11 +56,14 @@ public class CompassView extends Fragment {
     }
 
     public void updateArrowRotation(double rotation){
-       if(arrowIMG != null) arrowIMG.setRotation((float) (locationController.calculateBearing(FINDEME_COORDS[0],FINDEME_COORDS[1]) - rotation));
+       if(arrowIMG != null) arrowIMG.setRotation((float) (locationController.calculateBearing(findMe_cords[0],findMe_cords[1]) - rotation));
     }
 
     public  void updateCoordinatesDisplay(String coords){
         if(coordsText != null) coordsText.setText(coords);
     }
 
+    public void setFindMe_cords(double[] findMe_cords) {
+        this.findMe_cords = findMe_cords;
+    }
 }

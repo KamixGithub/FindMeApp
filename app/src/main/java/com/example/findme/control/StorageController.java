@@ -14,6 +14,9 @@ public class StorageController {
         this.locationList = new HashMap<>();
         this.userModelList = new HashMap<>();
         updatFromStorage();
+
+        addFriend(new UserModel("Test1",1));
+        addFriend(new UserModel("Test2",2));
     }
 
     private void updatFromStorage() {
@@ -37,12 +40,15 @@ public class StorageController {
         return locationList.remove(name) != null;
     }
 
-    public void updateFriendListView(){
-
+    public UserModel getUser(int friendCode){
+       return userModelList.get(friendCode);
     }
 
-    public void updateLocationListView(){
+    public HashMap<Integer,UserModel> getUserList(){
+        return userModelList;
     }
 
-
+    public HashMap<String, LocationModel> getLocationList() {
+        return locationList;
+    }
 }
