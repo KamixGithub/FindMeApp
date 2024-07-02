@@ -6,45 +6,65 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.findme.model.DeviceModel;
-import com.example.findme.view.MainActivity;
+import com.example.findme.model.UserModel;
+import com.example.findme.MainActivity;
+import com.example.findme.view.CompassView;
 
 public class SensorController implements SensorEventListener {
-    DeviceModel deviceModel;
+
     private SensorManager sensorManager;
     private Sensor rotationSensor;
-     private MainActivity activity;
+    private MainActivity activity;
+    private boolean isSensorRegistered;
 
-    public SensorController (MainActivity activity){
-        this.deviceModel = new DeviceModel();
+    public SensorController(MainActivity activity) {
+        this.activity = activity;
         this.sensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         this.rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-        this.activity = activity;
+        this.isSensorRegistered = false;
     }
 
     public void register() {
-        if (rotationSensor != null) {
-            sensorManager.registerListener(this, rotationSensor, SensorManager.SENSOR_DELAY_UI);
+        if (rotationSensor != null && !isSensorRegistered) {
+            sensorManager.registerListener(
+                    this,
+                    rotationSensor,
+                    SensorManager.SENSOR_DELAY_UI);
+            isSensorRegistered = true;
         }
     }
 
     public void unregister() {
-        sensorManager.unregisterListener(this);
+        if (isSensorRegistered) {
+            sensorManager.unregisterListener(this);
+            isSensorRegistered = false;
+        }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR) {
+            DeviceModel deviceModel = activity.getDeviceModel();
             SensorManager.getRotationMatrixFromVector(deviceModel.getrMat(), event.values);
-            deviceModel.setmAzimuth((float) Math.toDegrees(SensorManager.getOrientation(deviceModel.getrMat(), deviceModel.getOrientation())[0]));
+
+            deviceModel.setmAzimuth((float) Math.toDegrees(
+                    SensorManager.getOrientation(deviceModel.getrMat(), deviceModel.getOrientation())[0]));
         }
-        activity.getCompassView().updateArrowRotation(deviceModel.getmAzimuth());
+
+        UserModel focus = activity.getFocus();
+        if (focus != null) {
+            CompassView compassView = activity.getCompassView();
+            compassView.updateArrowRotation(activity.getDeviceModel().getmAzimuth(), focus);
+            compassView.setFocusText(focus.getName());
+        }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
 
+    public boolean isRegistered() {
+        return isSensorRegistered;
     }
 }

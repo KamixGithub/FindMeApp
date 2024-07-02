@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.1"
+fragmentTesting = "1.8.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -12,6 +13,13 @@ legacySupportV4 = "1.0.0"
 recyclerview = "1.3.0"
 lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
+gson = "2.8.8"
+mockitoCoreVersion = "3.11.2"
+mockitoAndroidVersion = "3.11.2"
+powermockVersion = "2.0.9"
+fragmenttestingVersion = "1.5.7"
+robolectricVersion = "4.6.1"
+byteBuddyVersion = "1.11.22"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -26,7 +34,15 @@ legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", ver
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+mockito = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCoreVersion" }
+mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockitoAndroidVersion" }
+powermock = { group = "org.powermock", name = "powermock-api-mockito2", version.ref = "powermockVersion" }
+modules = { group = "org.powermock", name = "powermock-module-junit4", version.ref = "powermockVersion" }
+fragment = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmenttestingVersion" }
+robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectricVersion" }
+byte-buddy = { group = "net.bytebuddy", name = "byte-buddy", version.ref = "byteBuddyVersion" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
-

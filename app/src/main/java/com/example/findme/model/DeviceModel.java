@@ -2,13 +2,23 @@ package com.example.findme.model;
 
 public class DeviceModel {
 
-    private double latitude;
-    private double longitude;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+
+    private int myFriendCode = 0;
+
     private float[] orientation = new float[3];
     private float[] rMat = new float[9];
 
     private float mAzimuth = 0;
 
+    public int getMyFriendCode() {
+        return myFriendCode;
+    }
+
+    public void setMyFriendCode(int myFriendCode) {
+        this.myFriendCode = myFriendCode;
+    }
 
     public double getLatitude() {
         return latitude;

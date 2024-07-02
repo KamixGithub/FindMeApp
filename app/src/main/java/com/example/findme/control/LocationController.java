@@ -8,53 +8,61 @@ import android.location.LocationManager;
 
 import androidx.annotation.NonNull;
 
-import com.example.findme.model.DeviceModel;
-import com.example.findme.view.MainActivity;
+import com.example.findme.MainActivity;
 
 public class LocationController implements LocationListener {
-    private final DeviceModel deviceModel;
-    private final MainActivity activity;
 
-    private LocationManager locationManager;
+    private final MainActivity mainActivity;
 
 
-    public LocationController(MainActivity activity) {
-        this.deviceModel = new DeviceModel();
-        this.activity = activity;
-        locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+    public LocationController(MainActivity mainActivity) {
+        this.mainActivity = mainActivity;
+        LocationManager locationManager = (LocationManager) mainActivity.getSystemService(Context.LOCATION_SERVICE);
 
-        if (activity.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && activity.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            activity.requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+        if (mainActivity.checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && mainActivity.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            mainActivity.requestPermissions(
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                            android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    101);
         } else {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, this);
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            if (lastKnownLocation!= null) {
-                deviceModel.setLatitude(lastKnownLocation.getLatitude());
-                deviceModel.setLongitude(lastKnownLocation.getLongitude());
-                activity.getCompassView().updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
-            }else{
-                //TODO
-            }
         }
 
     }
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        deviceModel.setLatitude(location.getLatitude());
-        deviceModel.setLongitude(location.getLongitude());
-        activity.getCompassView().updateCoordinatesDisplay(String.format("Latitude: %s° \nLongitude: %s°",deviceModel.getLatitude(),deviceModel.getLongitude()));
+        if (mainActivity.getDeviceModel() != null) {
+            mainActivity.getDeviceModel().setLatitude(location.getLatitude());
+            mainActivity.getDeviceModel().setLongitude(location.getLongitude());
+        }
     }
 
-    public double calculateBearing( double lat2, double lon2) {
-        double phi1 = Math.toRadians(deviceModel.getLatitude());
-        double phi2 = Math.toRadians(lat2);
-        double deltaLambda = Math.toRadians(lon2 - deviceModel.getLongitude());
+    public double calculateBearing(double lat2, double lon2) {
 
+        double lat1 = mainActivity.getDeviceModel().getLatitude();
+        double lon1 = mainActivity.getDeviceModel().getLongitude();
+
+        // Umwandlung von Grad in Bogenmaß
+        double phi1 = Math.toRadians(lat1);
+        double phi2 = Math.toRadians(lat2);
+        double lambda1 = Math.toRadians(lon1);
+        double lambda2 = Math.toRadians(lon2);
+
+        // Berechnung von y und x
+        double deltaLambda = lambda2 - lambda1;
         double y = Math.sin(deltaLambda) * Math.cos(phi2);
         double x = Math.cos(phi1) * Math.sin(phi2) -
                 Math.sin(phi1) * Math.cos(phi2) * Math.cos(deltaLambda);
-        return Math.toDegrees(Math.atan2(y, x));
+
+        // Berechnung des Winkels (Bearing) in Bogenmaß
+        double theta = Math.atan2(y, x);
+
+        // Umwandlung des Winkels in Grad und Anpassung auf den Bereich 0-360 Grad
+        double bearing = (Math.toDegrees(theta) + 360) % 360;
+
+        return bearing;
     }
+
 }

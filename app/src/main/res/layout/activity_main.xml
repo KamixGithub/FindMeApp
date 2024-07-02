@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkgreen"
     android:fitsSystemWindows="true"
-    tools:context=".view.MainActivity"
+    tools:context=".MainActivity"
     android:orientation="vertical">
 
     <FrameLayout
@@ -22,12 +22,14 @@
 
     <Button
         android:id="@+id/buttonFriend"
-        android:text="@string/Friend"
-        android:backgroundTint="@color/lightgreen"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginEnd="128dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/lightgreen"
+        android:text="@string/Friend"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
